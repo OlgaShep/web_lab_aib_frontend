@@ -8,6 +8,7 @@ remote: Total 129 (delta 28), reused 40 (delta 21), pack-reused 73
 Receiving objects: 100% (129/129), 5.74 MiB | 12.24 MiB/s, done.
 Resolving deltas: 100% (38/38), done.
 
+## начнем с example
 Admin@MSI MINGW64 ~
 $ curl example.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -59,9 +60,9 @@ $ curl example.com
 </body>
 </html>
 
-
+## запрос с использованием www.
 Admin@MSI MINGW64 ~
-$ curl www.example.com #запрос с использованием www.
+$ curl www.example.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1256  100  1256    0     0   2335      0 --:--:-- --:--:-- --:--:--  2369<!doctype html>
@@ -118,21 +119,19 @@ $ curl http://example.com
 100  1256  100  1256    0     0   2755      0 --:--:-- --:--:-- --:--:--  2809<!doctype html>
 #далее вывод такой же как и при использовании curl www.example.com
 
+## с такими запросами - сайт не найден
 Admin@MSI MINGW64 ~
 $ https://example.ru
 bash: https://example.ru: No such file or directory
 Admin@MSI MINGW64 ~
 $ https://example.com
 bash: https://example.com: No such file or directory
-#с такими запросами - сайт не найден
+
+
+### -k (или --insecure): Отключает проверку сертификата SSL/TLS. Это полезно, когда необходимо выполнить запрос на сервер с самоподписанным или недействительным сертификатом SSL/TLS. 
 
 Admin@MSI MINGW64 ~
 $ curl -k www.example.com  
-
-"""-k (или --insecure): Отключает проверку сертификата SSL/TLS. 
-Это полезно, когда необходимо выполнить запрос на сервер с самоподписанным 
-или недействительным сертификатом SSL/TLS. """
-
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1256  100  1256    0     0   3031      0 --:--:-- --:--:-- --:--:--  3078<!doctype html>
@@ -182,7 +181,8 @@ $ curl -k www.example.com
 </body>
 </html>
 
-Admin@MSI MINGW64 ~ #с использованием опции -s мы можем вывести информацию без заголовков
+## с использованием опции -s мы можем вывести информацию без заголовков
+Admin@MSI MINGW64 ~
 $ curl -s www.example.com
 <!doctype html>
 <html>
