@@ -1,4 +1,4 @@
-'''
+```
 Admin@MSI MINGW64 ~
 $ git clone https://github.com/OlgaShep/web_lab_aib_frontend.git
 Cloning into 'web_lab_aib_frontend'...
@@ -8,9 +8,10 @@ remote: Compressing objects: 100% (35/35), done.
 remote: Total 129 (delta 28), reused 40 (delta 21), pack-reused 73
 Receiving objects: 100% (129/129), 5.74 MiB | 12.24 MiB/s, done.
 Resolving deltas: 100% (38/38), done.
-'''
+```
 
 ## начнем с example
+```
 Admin@MSI MINGW64 ~
 $ curl example.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -61,7 +62,7 @@ $ curl example.com
 </div>
 </body>
 </html>
-
+```
 ## запрос с использованием www.
 Admin@MSI MINGW64 ~
 $ curl www.example.com 
