@@ -236,7 +236,10 @@ $ curl -s www.example.com
 </body>
 </html>
 ```
-
+# -I -w выводит общую информацию + заголовки
+вывод дополнен номером порта с помощью  "%{remote_port}\n"
+№ порта это 80, находится ниже остальной информации
+```
 Admin@MSI MINGW64 ~
 $    curl -I -w "%{remote_port}\n" http://example.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -255,10 +258,12 @@ Server: ECS (sec/976A)  #сервер
 X-Cache: HIT #Заголовок означает, что контент расположен на CDN (Content Delivery Network), а не на одном сервере.
 Content-Length: 648 #Заголовок с информацией о длине контента в символах.
 
-80 #дополненный вывод заголовка и другой информации номером порта с помощью  "%{remote_port}\n"
-
+80
+```
+# на последней строчке - значение хоста ресурса, получен благодаря  "%{url_effective}\n" 
+```
 Admin@MSI MINGW64 ~
-$    curl -I -w "%{url_effective}\n" http://example.com #-I -w выводит общую информацию + заголовки
+$    curl -I -w "%{url_effective}\n" http://example.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0HTTP/1.1 200 OK
@@ -275,56 +280,74 @@ Server: ECS (sec/976A)
 X-Cache: HIT
 Content-Length: 648
 
-http://example.com/ #значение хоста ресурса, получен благодаря -w "%{url_effective}\n"  
-
+http://example.com/  
+```
+# вывод только информации о формате данных (+заголовки)
+```
 Admin@MSI MINGW64 ~
 $    curl -I http://example.com | grep -iE "content-type"
-#вывод только информации о формате данных (+заголовки)
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 Content-Type: text/html; charset=UTF-8
-
+```
+# код ответа и его значение
+```
 Admin@MSI MINGW64 ~ 
-$    curl -I http://example.com | head -n 1  #код ответа и его значение
+$    curl -I http://example.com | head -n 1 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 HTTP/1.1 200 OK
-
+```
+## протокол по которому осуществляется запрос 
+```
 Admin@MSI MINGW64 ~
-$    curl -I http://example.com | awk 'NR==1{print $2}' #протокол по которому осуществляется запрос
+$    curl -I http://example.com | awk 'NR==1{print $2}' 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 200
-
-Admin@MSI MINGW64 ~ #вывод только заголовков
+```
+# вывод только заголовков
+```
+Admin@MSI MINGW64 ~ 
 $    curl -I http://example.com | grep -iE "x-some-header|other-header"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
-Admin@MSI MINGW64 ~ #вывод текущей даты
+```
+## вывод текущей даты
+```
+Admin@MSI MINGW64 ~ 
 $ curl -I -s www.example.com | grep -i "Date"
 Date: Tue, 19 Sep 2023 19:10:48 GMT
-
-Admin@MSI MINGW64 ~ #выводит дату/время, по истечении которой ответ сервера считается устаревшим.
+```
+## выводит дату/время, по истечении которой ответ сервера считается устаревшим.
+```
+Admin@MSI MINGW64 ~ 
 $ curl -I -s www.example.com | grep -i "Expires"
 Expires: Tue, 26 Sep 2023 19:12:28 GMT
-
-Admin@MSI MINGW64 ~ #выводит сервер
+```
+## выводит сервер
+```
+Admin@MSI MINGW64 ~ 
 $ curl -I -s www.example.com | grep -i "Server"
 Server: ECS (sec/96EE)
-
+```
+## cache-control 
+диктует правила, которые определяют, 
+будут ли эти ресурсы загружены из локального кэша данного пользователя, 
+или браузер должен отправить запрос на сервер для получения новых ресурсов
+Директива ответа max-age=N указывает, что ответ остается свежим в течение N секунд после его создания.
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s www.example.com | grep -i "Cache-Control"
 Cache-Control: max-age=604800
-"""cache-control диктует правила, которые определяют, 
-будут ли эти ресурсы загружены из локального кэша данного пользователя, 
-или браузер должен отправить запрос на сервер для получения новых ресурсов"""
-
-#аналогично введем запросы для сайта ргупс, самый полный ответ позволяет получить запрос https:
+```
+# аналогично введем запросы для сайта ргупс, самый полный ответ позволяет получить запрос https:
+```
 Admin@MSI MINGW64 ~
 $ curl https://www.rgups.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
