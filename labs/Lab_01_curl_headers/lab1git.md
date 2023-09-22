@@ -132,7 +132,7 @@ Admin@MSI MINGW64 ~
 $ https://example.com
 bash: https://example.com: No such file or directory
 ```
-### -k (или --insecure): Отключает проверку сертификата SSL/TLS. Это полезно, когда необходимо выполнить запрос на сервер с самоподписанным или недействительным сертификатом SSL/TLS. 
+## -k (или --insecure): Отключает проверку сертификата SSL/TLS. Это полезно, когда необходимо выполнить запрос на сервер с самоподписанным или недействительным сертификатом SSL/TLS. 
 ```
 Admin@MSI MINGW64 ~
 $ curl -k www.example.com  
@@ -236,7 +236,7 @@ $ curl -s www.example.com
 </body>
 </html>
 ```
-# -I -w выводит общую информацию + заголовки
+## -I -w выводит общую информацию + заголовки
 вывод дополнен номером порта с помощью  "%{remote_port}\n"
 № порта это 80, находится ниже остальной информации
 ```
@@ -260,7 +260,7 @@ Content-Length: 648 #Заголовок с информацией о длине 
 
 80
 ```
-# на последней строчке - значение хоста ресурса, получен благодаря  "%{url_effective}\n" 
+## на последней строчке - значение хоста ресурса, получен благодаря  "%{url_effective}\n" 
 ```
 Admin@MSI MINGW64 ~
 $    curl -I -w "%{url_effective}\n" http://example.com 
@@ -282,7 +282,7 @@ Content-Length: 648
 
 http://example.com/  
 ```
-# вывод только информации о формате данных (+заголовки)
+## вывод только информации о формате данных (+заголовки)
 ```
 Admin@MSI MINGW64 ~
 $    curl -I http://example.com | grep -iE "content-type"
@@ -292,7 +292,7 @@ $    curl -I http://example.com | grep -iE "content-type"
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 Content-Type: text/html; charset=UTF-8
 ```
-# код ответа и его значение
+## код ответа и его значение
 ```
 Admin@MSI MINGW64 ~ 
 $    curl -I http://example.com | head -n 1 
@@ -310,7 +310,7 @@ $    curl -I http://example.com | awk 'NR==1{print $2}'
   0   648    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 200
 ```
-# вывод только заголовков
+## вывод только заголовков
 ```
 Admin@MSI MINGW64 ~ 
 $    curl -I http://example.com | grep -iE "x-some-header|other-header"
@@ -346,7 +346,7 @@ Admin@MSI MINGW64 ~
 $ curl -I -s www.example.com | grep -i "Cache-Control"
 Cache-Control: max-age=604800
 ```
-# аналогично введем запросы для сайта ргупс, самый полный ответ позволяет получить запрос https:
+## аналогично введем запросы для сайта ргупс, самый полный ответ позволяет получить запрос https:
 ```
 Admin@MSI MINGW64 ~
 $ curl https://www.rgups.ru
@@ -1207,7 +1207,9 @@ $ curl https://www.rgups.ru
 <noscript><div><img src="https://mc.yandex.ru/watch/21318811" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>
 </html>
-
+```
+## ответы короче 
+```
 Admin@MSI MINGW64 ~
 $ curl rgups.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1246,7 +1248,17 @@ $ curl http://www.rgups.ru
 <hr><center>nginx/1.19.1</center>
 </body>
 </html>
-
+```
+## только заголовки
+```
+Admin@MSI MINGW64 ~
+$ curl -I rgups.ru | grep -iE "x-some-header|other-header" 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0   169    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+```
+## запрос с -I -s rgups.ru
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s rgups.ru
 HTTP/1.1 301 Moved Permanently #код ответа и его значение
@@ -1255,17 +1267,10 @@ Date: Wed, 20 Sep 2023 04:48:20 GMT  #текущая дата по время з
 Content-Type: text/html #вывод информации о формате данных
 Content-Length: 169 #Заголовок с информацией о длине контента в символах.
 Connection: keep-alive #определяет, остаётся ли сетевое соединение активным после завершения текущей транзакции (запроса)
-Location: https://rgups.ru/ 
-"""заголовок ответа, который используется при 2 обстоятельствах, 
-чтобы попросить браузер перенаправить URL 
-или предоставить информацию о местоположении вновь созданного ресурса"""
-
-Admin@MSI MINGW64 ~
-$ curl -I rgups.ru | grep -iE "x-some-header|other-header" #только заголовки
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0   169    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
+Location: https://rgups.ru/ #заголовок ответа, который используется при 2 обстоятельствах, чтобы попросить браузер перенаправить URL или предоставить информацию о местоположении вновь созданного ресурса
+```
+## запрос с -I -s www.rgups.com. как мы видим ответы отличаются, например во 2 случае есть X-Powered-By, X-Redirect-By и тд
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s www.rgups.com
 HTTP/1.1 301 Moved Permanently #код ответа и его значение
@@ -1277,15 +1282,24 @@ Upgrade: h2,h2c #может использоваться для обновлен
 Connection: Upgrade #как мы видим при использовании www.rgups.com и rgups.ru ответы Connection различаются
 Location: https://rgups.com/
 Content-Type: text/html; charset=UTF-8
-
+```
+## код ответа и его значение
+```
 Admin@MSI MINGW64 ~
-$ curl -I -s www.rgups.com | head -n 1 #код ответа и его значение
+$ curl -I -s www.rgups.com | head -n 1 
 HTTP/1.1 301 Moved Permanently
-
-Admin@MSI MINGW64 ~ #протокол по которому осуществляется запрос
+```
+## протокол по которому осуществляется запрос
+```
+Admin@MSI MINGW64 ~ 
 $ curl -I -s www.rgups.com | awk 'NR==1{print $2}'
 301
-
+```
+## сравнение
+не на все запросы можно получить нужный ответ
+например здесь получен 1 вывод location от сайта ргупс, но не получен от сайта экзампл
+а выводы pragma отсутвуют у обоих сайтов ргупс и экзампл
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s www.rgups.com | grep -i "Location"
 Location: https://rgups.com/
@@ -1295,15 +1309,11 @@ Admin@MSI MINGW64 ~
 $ curl -I -s www.example.com | grep -i "Pragma"
 Admin@MSI MINGW64 ~
 $ curl -I -s www.example.com | grep -i "Location"  
-"""не на все запросы можно получить нужный ответ
-например здесь получен 1 вывод location от сайта ргупс, но не получен от сайта экзампл
-а выводы pragma отсутвуют у обоих сайтов ргупс и экзампл """
-
-
-"""вы не поверите, но для других последующих сайтов запросы и опции curl 
-обозначают то же самое что и для rgups и example"""
-
-#github.com
+```
+вы не поверите, но для других последующих сайтов запросы и опции curl 
+обозначают то же самое что и для rgups и example
+## github.com
+```
 Admin@MSI MINGW64 ~
 $ curl github.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1338,26 +1348,29 @@ $ curl www.github.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-Admin@MSI MINGW64 ~
-$ curl -I https://www.github.com | grep -iE "x-some-header|other-header"
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
+```
+## запрос curl -I -s
+как мы видим тут выводится меньшее кол-во данных, только код ответа, длина и ссылка на сайт
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s www.github.com
 HTTP/1.1 301 Moved Permanently
 Content-Length: 0
 Location: https://www.github.com/ 
-#как мы видим тут выводится меньшее кол-во данных, только код ответа, длина и ссылка на сайт
-
+```
+## вывод заголовков, порта и протокола
+```
+Admin@MSI MINGW64 ~
+$ curl -I https://www.github.com | grep -iE "x-some-header|other-header" #заголовки
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 Admin@MSI MINGW64 ~ #протокол по которому осуществляется запрос
 $ curl -I https://github.com | awk 'NR==1{print $2}'
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 200
-
 Admin@MSI MINGW64 ~  #вывод номера порта
 $ curl -I -w "%{remote_port}\n" github.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1367,12 +1380,12 @@ Content-Length: 0
 Location: https://github.com/
 
 80
-
-Admin@MSI MINGW64 ~
-$ curl -I -s www.github.com | grep -i "Data"
-#с подобными запросами нужный ответ не приходит :(
-
-#ржд
+```
+## с подобными запросами нужный ответ не приходит :(
+`$ curl -I -s www.github.com | grep -i "Data" `
+## ржд
+все ответы короткие
+```
 Admin@MSI MINGW64 ~
 $ curl https://www.rzd.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1416,6 +1429,7 @@ $ curl rzd.ru
 <center><h1>301 Moved Permanently</h1></center>
 </body>
 </html>
+```
 
 Admin@MSI MINGW64 ~
 $ curl -I -s  http://www.rzd.ru
