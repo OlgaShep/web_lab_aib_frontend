@@ -64,6 +64,7 @@ $ curl example.com
 </html>
 ```
 ## запрос с использованием www.
+```
 Admin@MSI MINGW64 ~
 $ curl www.example.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -121,18 +122,18 @@ $ curl http://example.com
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1256  100  1256    0     0   2755      0 --:--:-- --:--:-- --:--:--  2809<!doctype html>
 #далее вывод такой же как и при использовании curl www.example.com
-
+```
 ## с такими запросами - сайт не найден
+```
 Admin@MSI MINGW64 ~
 $ https://example.ru
 bash: https://example.ru: No such file or directory
 Admin@MSI MINGW64 ~
 $ https://example.com
 bash: https://example.com: No such file or directory
-
-
+```
 ### -k (или --insecure): Отключает проверку сертификата SSL/TLS. Это полезно, когда необходимо выполнить запрос на сервер с самоподписанным или недействительным сертификатом SSL/TLS. 
-
+```
 Admin@MSI MINGW64 ~
 $ curl -k www.example.com  
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -183,8 +184,9 @@ $ curl -k www.example.com
 </div>
 </body>
 </html>
-
+```
 ## с использованием опции -s мы можем вывести информацию без заголовков
+```
 Admin@MSI MINGW64 ~
 $ curl -s www.example.com
 <!doctype html>
@@ -233,6 +235,7 @@ $ curl -s www.example.com
 </div>
 </body>
 </html>
+```
 
 Admin@MSI MINGW64 ~
 $    curl -I -w "%{remote_port}\n" http://example.com
