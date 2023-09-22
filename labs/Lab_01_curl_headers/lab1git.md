@@ -1334,7 +1334,7 @@ $ curl https://github.com
   <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
   <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
   <link rel="preconnect" href="https://github.githubassets.com" crossorigin>
-#нереально длинный ответ с http
+#нереально длинный вырезанныйответ с http
 </html>
 
 Admin@MSI MINGW64 ~
@@ -1430,7 +1430,8 @@ $ curl rzd.ru
 </body>
 </html>
 ```
-
+##  запрос curl -I -s
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s  http://www.rzd.ru
 HTTP/1.1 301 Moved Permanently
@@ -1439,7 +1440,9 @@ Content-Type: text/html
 Content-Length: 150
 Connection: keep-alive
 Location: https://www.rzd.ru:443/
-
+```
+## подобные запросы не работают
+```
 Admin@MSI MINGW64 ~
 $ curl -I -w "%{remote_port}\n" http://www.rzd.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1453,10 +1456,10 @@ $ curl -i -k http://www.rzd.ru --proxy "http://wp:3128"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0curl: (5) Could not resolve proxy: wp
-
-#подобные запросы не работают
-
-#яндекс
+```
+## яндекс
+с 4-мя спосоюави ввода, выдается только  начало
+```
 Admin@MSI MINGW64 ~
 $ curl dzen.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1477,7 +1480,9 @@ $ curl www.dzen.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
+```
+пробуем узнать подробности
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s dzen.ru
 HTTP/1.1 302 Moved temporarily
@@ -1485,13 +1490,25 @@ Content-Length: 0
 Location: https://dzen.ru/
 
 Admin@MSI MINGW64 ~
-$ curl -I https://dzen.ru | awk 'NR==1{print $2}'
+$ curl -I https://dzen.ru | awk 'NR==1{print $2}' \\узнаем протокол по которому осуществляется запрос
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 200
 
 Admin@MSI MINGW64 ~
+$ curl -I -s dzen.ru | grep -i "Data"
+\\ничего не выводит
+
+Admin@MSI MINGW64 ~
+$ curl -I dzen.ru | grep -iE "x-some-header|other-header"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+Admin@MSI MINGW64 ~
+$ curl -I -s dzen.ru | head -n 1
+HTTP/1.1 302 Moved temporarilyAdmin@MSI MINGW64 ~
 $ curl -I -k -w "%{remote_port}\n" https://dzen.ru
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -1507,21 +1524,9 @@ X-XSS-Protection: 1; mode=block
 X-Yandex-Req-Id: 1695190819563337-1559746283847769837000128-production-app-host-vlx-zen-146
 
 443
-
-Admin@MSI MINGW64 ~
-$ curl -I -s dzen.ru | grep -i "Data" #ничего не выводит
-
-Admin@MSI MINGW64 ~
-$ curl -I dzen.ru | grep -iE "x-some-header|other-header"
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
-Admin@MSI MINGW64 ~
-$ curl -I -s dzen.ru | head -n 1
-HTTP/1.1 302 Moved temporarily
-
-
+```
+## python
+```
 Admin@MSI MINGW64 ~
 $ curl https://www.python.org
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1545,7 +1550,6 @@ $ curl https://www.python.org
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 #опять много html ....
-
 </html>
 
 Admin@MSI MINGW64 ~
@@ -1565,7 +1569,9 @@ $ curl python.org
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
+```
+## curl -i -s https://www.python.org
+```
 Admin@MSI MINGW64 ~
 $ curl -i -s https://www.python.org
 HTTP/1.1 200 OK
@@ -1585,7 +1591,9 @@ X-Timer: S1695191160.709484,VS0,VE0
 Vary: Cookie
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 #далее идет html который мы уже видели
-
+```
+## запросы номеров протокола и порта
+```
 Admin@MSI MINGW64 ~
 $ curl -I https://www.python.org | awk 'NR==1{print $2}'
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1614,8 +1622,9 @@ Vary: Cookie
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
 443
-
-#в случае с git-scm не так много html кода
+```
+## в случае с git-scm не так много html кода
+```
 Admin@MSI MINGW64 ~
 $ curl https://git-scm.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1807,7 +1816,9 @@ $ curl git-scm.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-
+```
+## curl -I -s
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s https://git-scm.com
 HTTP/1.1 200 OK
@@ -1825,24 +1836,24 @@ Etag: W/"db69273d9410cbf4536e9d4b3a59685d" # закрытый идентифик
 #присвоенный веб-сервером на определённую версию ресурса, найденного на URL
 X-Request-Id: 476d2e08-474c-4f3d-8503-d83ed21ae45f #уникальный идентификатор ответа.
 X-Runtime: 0.015343 #используется для указания времени (в секундах), необходимого приложению для обработки каждого запроса.
-Via: 1.1 vegur #Он используется для отслеживания пересылки сообщений,
-#предотвращения зацикливания запросов и определения протокольных 
-#возможностей отправителей по цепочке запрос/ответ. 
+Via: 1.1 vegur #Он используется для отслеживания пересылки сообщений, предотвращения зацикливания запросов и определения протокольных возможностей отправителей по цепочке запрос/ответ. 
 CF-Cache-Status: HIT
 Age: 14159
 Server: cloudflare
-CF-RAY: 80980a9d9b5316fe-DME #(иначе известный как Ray ID) представляет собой хэшированное значение,
-#в котором закодирована информация о дата-центре и запросе посетителя
-
+CF-RAY: 80980a9d9b5316fe-DME #(иначе известный как Ray ID) представляет собой хэшированное значение, в котором закодирована информация о дата-центре и запросе посетителя
+```
+## вывод номера порта
+```
 Admin@MSI MINGW64 ~
 $ curl -I -k -w "%{remote_port}\n" https://git-scm.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0HTTP/1.1 200 OK
-#laalala
-443 #вывод номера порта
-
-#вижуал студиа
+#laalala повторяющийся вывод
+443 
+```
+## вижуал студиа
+```
 Admin@MSI MINGW64 ~
 $ curl https://code.visualstudio.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -1869,6 +1880,9 @@ $ curl code.visualstudio.com
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+```
+## curl -I -s https://code.visualstudio.com
+```
 Admin@MSI MINGW64 ~
 $ curl -I -s https://code.visualstudio.com
 HTTP/1.1 200 OK
@@ -1876,25 +1890,26 @@ Content-Length: 50213
 Content-Type: text/html; charset=utf-8
 Accept-Ranges: bytes
 ETag: W/"c425-XBxswsHoV0dlJCAKuBbwZ9s5rjQ"
-Strict-Transport-Security: max-age=31536000; includeSubDomains #аголовок ответа (часто используется аббревиатура HSTS (en-US)), позволяющий web-сайтам уведомить браузер о том, что доступ к ним должен быть осуществлён только посредством HTTPS вместо HTTP.
+Strict-Transport-Security: max-age=31536000; includeSubDomains \\заголовок ответа (часто используется аббревиатура HSTS (en-US)), позволяющий web-сайтам уведомить браузер о том, что доступ к ним должен быть осуществлён только посредством HTTPS вместо HTTP.
 Content-Security-Policy: frame-ancestors 'self'
 X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 X-Content-Type-Options: nosniff
 X-Powered-By: ASP.NET
-x-azure-ref: 07JUKZQAAAACrDAhLGc56T6nDnVrYk0whU1RPRURHRTE0MDYAYmU4N2RjNmQtNDBmOS00NWIwLTg4MTAtOTkxMDg3ZWY4YjI5
-#никальная ссылочная строка, идентифицирующая запрос, обслуживаемый Front Door. Она используется для поиска в журналах доступа и критически важных для устранения неполадок
+x-azure-ref: 07JUKZQAAAACrDAhLGc56T6nDnVrYk0whU1RPRURHRTE0MDYAYmU4N2RjNmQtNDBmOS00NWIwLTg4MTAtOTkxMDg3ZWY4YjI5 \\никальная ссылочная строка, идентифицирующая запрос, обслуживаемый Front Door. Она используется для поиска в журналах доступа и критически важных для устранения неполадок
 X-Cache: CONFIG_NOCACHE
 Date: Wed, 20 Sep 2023 06:49:16 GMT
-
+```
+## номер порта и только заголовки
+```
 Admin@MSI MINGW64 ~
 $ curl -I -k -w "%{remote_port}\n" https://code.visualstudio.com
-#повторяющая информация предыдущего запроса и номер порта
+\\повторяющая информация предыдущего запроса и номер порта
 443
-
-Admin@MSI MINGW64 ~ #заголовки
+Admin@MSI MINGW64 ~ \\заголовки
 $ curl -I  http://code.visualstudio.com | grep -iE "x-some-header|other-header"
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+```
