@@ -83,4 +83,5 @@ color:AliceBlue;
 ```
 ## итоговый сайт
 добавлен градиент и изменены некоторые шрифты
+и цвет ссылки, чтобы её всегда с таким фоном видно было
 ![итоговый сайт](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_04_CSS_intro/solution/Снимок%20экрана%20(1355).png)
