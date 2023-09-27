@@ -83,4 +83,4 @@ color:AliceBlue;
 ```
 ## итоговый сайт
 добавлен градиент и изменены некоторые шрифты
-![итоговый сайт](D:\web_lab_aib_frontend\labs\Lab_04_CSS_intro\solution\Снимок экрана (1355).png)
+![итоговый сайт](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_04_CSS_intro/solution/Снимок%20экрана%20(1355).png)
