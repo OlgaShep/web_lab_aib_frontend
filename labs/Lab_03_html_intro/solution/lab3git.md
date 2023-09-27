@@ -1,6 +1,4 @@
-лабораторная №3
-### файлы в папке
-![файлы в папке](D:\3 курс\5 семестр\ВЕБкам\solution\файлы.jpg)
+##лабораторная №3
 ### код task_1.html
 ```
 <!DOCTYPE html>
@@ -23,6 +21,6 @@
 </html>
 ```
 ### открывающееся окно в браузере
-![открывающееся окно в браузере](D:\3 курс\5 семестр\ВЕБкам\solution\итог.jpg)
+![открывающееся окно в браузере](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_03_html_intro/solution/итог.png)
 ### вид с неправильной ссылкой на album.png
-![вид с неправильной ссылкой](D:\3 курс\5 семестр\ВЕБкам\solution\ошибка.jpg)
+![вид с неправильной ссылкой](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_03_html_intro/solution/ошибка.png)
