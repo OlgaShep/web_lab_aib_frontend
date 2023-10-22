@@ -1,0 +1,68 @@
+header {
+width:100%;
+background: AliceBlue;
+height: 110px;
+position: fixed;
+margin-bottom: 0px;
+}
+main {
+padding-top: 100px;
+}
+.logocenter {
+    text-align: center;
+}
+h1, h2, p {
+font-family: franklin gothic medium;
+}
+nav {
+float: right;
+margin-right: 50px;
+line-height: 30px;
+}
+a, p{
+color: Navy;
+}
+.item {
+background: AliceBlue;
+width: 440px;
+height: 300px;
+margin-bottom: 10px;
+margin-left: 25px;
+}
+.item2 {
+background: AliceBlue;
+width: 40%;
+height: 300px;
+margin-bottom: 10px;
+margin-left:5%;
+}
+img {
+width: 200px;
+}
+.main-catalog {
+text-align: center;
+align-item: center;
+display: flex;
+flex-wrap: wrap;
+padding-left: 12px;
+padding-right: 12px;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.promo-catalog {
+text-align: center;
+align-item: center;
+display: flex;
+flex-wrap: wrap;
+padding-left: 12px;
+padding-right: 12px;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+@media (min-width: 1280px) {
+.item2{
+width:20%;
+margin-bottom: 30px;
+margin-left:4%;
+}
+}
