@@ -1,7 +1,7 @@
 ### как выглядит страница компьютерной версии
-![комп верс](/comp_lab5.png)
+![комп верс](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_05_HTML_CSS/solution/comp_lab5.png)
 ### как выглядит страница мобильной версии
-![мобил верс](/mobil_lab5.png)
+![мобил верс](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_05_HTML_CSS/solution/mobil_lab5.png)
 ### файл html
 ```
 <!DOCTYPE html>
