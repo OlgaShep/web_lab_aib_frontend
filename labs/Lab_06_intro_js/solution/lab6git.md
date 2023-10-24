@@ -23,11 +23,11 @@
 ```
 
 ##### окно появляющееся из-за alert(apple)
-![alert_apple](\foto\alert_apple_zadanie1.PNG)
+![alert_apple](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/alert_apple_zadanie1.PNG)
 ##### окно появляющееся из-за alert(conditions)
-![alert_conditions](\foto\alert_condition_zadanie1.PNG)
+![alert_conditions](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/alert_condition_zadanie1.PNG)
 ##### вывод в console
-![console](\foto\consolelog_zadanie1.PNG)
+![console](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie1.PNG)
 
 #### Вопросы
 1. Через какой оператор Вы объявили переменую? 
@@ -70,7 +70,7 @@
 </html>
 ```
 ##### вывод в console
-![console_zadanie2](\foto\consolelog_zadanie2.PNG)
+![console_zadanie2](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie2.PNG)
 
 ### задание 3 работа с массивами
 код
@@ -95,7 +95,7 @@ console.log(array);
 </html>
 ```
 ##### вывод в console
-![console_zadanie3](\foto\consolelog_zadanie3.PNG)
+![console_zadanie3](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie3.PNG)
 
 ### задание 4 Работа с функциями
 код
@@ -145,7 +145,7 @@ console.log(random_word());
 </html>
 ```
 ##### вывод в console
-![console_zadanie4](\foto\consolelog_zadanie4.PNG)
+![console_zadanie4](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie4.PNG)
 
 ### задание 5 Работа с объектами
 код
@@ -197,6 +197,6 @@ console.log(salary);
 </html>
 ```
 ##### вывод метода get_inform в alert
-![alert_zadani5](\foto\alert_zadani5.PNG)
+![alert_zadani5](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/alert_zadani5.PNGG)
 ##### вывод в console
-![console_zadanie5](\foto\consolelog_zadanie5.PNG)
+![console_zadanie5](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie5.PNG)
