@@ -197,6 +197,6 @@ console.log(salary);
 </html>
 ```
 ##### вывод метода get_inform в alert
-![alert_zadani5](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/alert_zadani5.PNGG)
+![alert_zadanie5](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/alert_zadani5.PNG)
 ##### вывод в console
 ![console_zadanie5](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_06_intro_js/solution/foto/consolelog_zadanie5.PNG)
