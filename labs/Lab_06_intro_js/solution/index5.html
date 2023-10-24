@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>JS</title>
+</head>
+<body>
+<script>
+ let obect = {};
+    obect.firstName = 'Olga';
+    obect.surname = 'Shepeleva';
+    obect.patronymic = 'Romanovna';
+    obect.birthday = '21.11.2003';
+    obect.hobby = 'sleep';
+    obect.group = 'АСБ-037';
+obect.get_inform = function () {
+    let year = this.birthday.substring(6,10);
+    let age = 2023 - year;
+    let inf = 'FIO: ' + this.surname + ' ' + this.firstName + ' ' + this.patronymic + ' ' + age + ' '  + year + ' hobby - ' + this.hobby;
+    return inf;
+    }
+alert(obect.get_inform());
+console.log(obect.get_inform());
+
+let obect2 = {
+    'Лю Цзяна': 10000000,
+    'Лю Янбин': 10000000,
+    'Ху': 1000000,
+    'Цяо': 10000000,
+    'Пархоменко': 200000,
+    'Шепелева': 500000,
+    'Макаревич': 100000,
+    'Гисс': 150000,
+    'Ким': 200000,
+    'Боровинчкий': 1,
+    };
+let salary = 0;
+for (let key in obect2){
+    salary += obect2[key];
+    }
+console.log(salary);
+</script>
+</body>
+</html>
