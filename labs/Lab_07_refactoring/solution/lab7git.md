@@ -12,7 +12,7 @@ else {
 }
 
 let World = 'world';
-FirstPrompt =FirstPrompt + World;
+FirstPrompt = FirstPrompt + World;
 ```
 ### Задание 2. level iron
 мда ну тут треш полный, а не исходник кнчн... для 10 строчек вывода такой кошмар создавать :((
@@ -29,11 +29,11 @@ fruit = Object.keys(ColourFruits)
 colour = Object.values(ColourFruits)
 
 for (let key in fruit) {
-        console.log(fruit[key]);
+    console.log(fruit[key]);
 }
     
 for (let key in fruit) {
-        console.log(fruit[key] + ' ' + colour[key]);
+    console.log(fruit[key] + ' ' + colour[key]);
 }
 ```
 
@@ -65,7 +65,7 @@ if (!isNaN(parseFloat(salary))) {
     salary=parseFloat(salary);
 }
 else {
-    salary=0;
+    salary = 0;
 }
 
 while (CountPeople === 0) {
@@ -98,17 +98,19 @@ let MeanRating = 0,
 for (let indexStudent = 0; indexStudent < ClassStudent.length; indexStudent++) {
 
     if (ClassStudent[indexStudent].Rating > 5) {
-    console.log('Это значение учитываться не будет оно не соответствует допустимым значениям');
+        console.log('Это значение учитываться не будет оно не соответствует допустимым значениям');
     }
 
     if (ClassStudent[indexStudent].Rating < 0) {
-    console.log('Это значение учитываться не будет оно не соответствует допустимым значениям');
+        console.log('Это значение учитываться не будет оно не соответствует допустимым значениям');
     }
 
-    if (! (ClassStudent[indexStudent].Rating <= 5 && ClassStudent[indexStudent].Rating >= 0 )) continue;
+    if (! (ClassStudent[indexStudent].Rating <= 5 && ClassStudent[indexStudent].Rating >= 0 )) {
+        continue;
+    }
 
     if (ClassStudent[indexStudent].Rating < 4) {
-    BadStudent.push(ClassStudent[indexStudent]);
+        BadStudent.push(ClassStudent[indexStudent]);
     }
 
     MeanRating += ClassStudent[indexStudent].Rating;
@@ -120,7 +122,7 @@ console.log('Средняя оценка: ' + MeanRating);
 console.log('Плохие студенты: ');
 
 if (BadStudent.length === 0) {
-console.log('Таких нет');
+    console.log('Таких нет');
 }
 
 BadStudent.forEach((index) => { console.log('Фио: ' + index.FIO + '; Оценка: ' + index.Rating) });
