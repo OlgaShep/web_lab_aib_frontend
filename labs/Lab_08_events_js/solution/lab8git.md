@@ -124,6 +124,7 @@ blueInput.addEventListener('input', changeBackgroundColor);
 changeBackgroundColor();
 ```
 здесь показана работа страницы, если мы установим значения "red 122, green 23, blue 85". мы можем изменять значения, вводя другие числа
+
 ![задание 2](https://github.com/OlgaShep/web_lab_aib_frontend/blob/main/labs/Lab_08_events_js/solution/foto/task2.PNG)
 
 ### задание 3
