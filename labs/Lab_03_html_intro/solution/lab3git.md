@@ -1,13 +1,13 @@
-##лабораторная №3
+## лабораторная №3
 ### код task_1.html
 ```
 <!DOCTYPE html>
 <html lang="ru">
 <html>
   <head>
-    <title>The Life of ITUshnic</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-    <link rel="icon" type="image/x-icon" href="playlist-favicon.ico">
+        <title>The Life of ITUshnic</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <link rel="icon" type="image/x-icon" href="playlist-favicon.ico">
   </head>
 <body>
   <h1 style="font-size: 31px; text-transform: uppercase; font-style: italic;">THE LIFE OF</h1>
