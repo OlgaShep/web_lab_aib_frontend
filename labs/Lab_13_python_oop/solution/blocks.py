@@ -1,76 +1,111 @@
 from base import BaseXlsBlock
 from datetime import datetime
-from collections import defaultdict
+from collections import Counter
 
+format_h1 = {'bold': True, 'font_size': '14', 'border': 2, 'align': 'center',
+             'font_name': 'Arial', 'bg_color': '#fcd5b4'}
+format_h2 = {'bold': True, 'font_size': '10', 'border': 3, 'align': 'center',
+             'font_name': 'Arial', 'bg_color': '#c5d9f1'}
+
+class HeaderBlock(BaseXlsBlock):
+    NAME = 'Параметры запроса'
+    HEADERS = ['Дата выгрузки', 'Период выгрузки']
+
+    def write_header(self):
+        header_format = self.workbook.add_format(format_h1)
+        subheader_format = self.workbook.add_format(format_h2)
+        self.worksheet.write(self.row, self.col, self.NAME, header_format)
+        self.row += 1
+        for idx, name in enumerate(self.HEADERS):
+            self.worksheet.write(self.row, idx, name, subheader_format)
+        self.row += 1
+
+    def write_data(self):
+        subheader_format = self.workbook.add_format(format_h2)
+        maxDate, minDate = datetime(1, 1, 1), datetime(3000, 12, 31)
+        self.worksheet.write(self.row, 0, datetime.now().strftime('%Y-%m-%d'), subheader_format)
+        for payData in self.data['payments']:
+            maxDate = max(datetime(*list(map(int, payData["created_at"][:10].split('-')))), maxDate)
+            minDate = min(datetime(*list(map(int, payData["created_at"][:10].split('-')))), minDate)
+        self.worksheet.write(self.row, 1, f'{minDate.strftime("%Y-%m-%d")} - {maxDate.strftime("%Y-%m-%d")}',
+                             subheader_format)
 
 class TopPayersBlock(BaseXlsBlock):
-    NAME = "Отчёт по активным клиентам"
+    NAME = 'Отчёт по активным клиентам'
+    HEADERS = ['Топ клиентов', 'Q4 2023', 'Q3 2023', 'Q2 2023', 'Q1 2023', 'Q4 2022']
 
     def write_header(self):
-        self.worksheet.write(self.row, self.col, self.NAME, self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 1, "ФИО", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 2, "Общая сумма", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-    def write_data(self):
-        self.col += 1
+        header_format = self.workbook.add_format(format_h1)
+        subheader_format = self.workbook.add_format(format_h2)
+        self.worksheet.write(self.row, self.col, self.NAME, header_format)
+        self.row += 1
+        for idx, name in enumerate(self.HEADERS):
+            self.worksheet.write(self.row, idx, name, subheader_format)
         self.row += 1
 
-        clients = self.data['clients']
-        payments = self.data['payments']
-
-        quarterly_payments = defaultdict(lambda: defaultdict(float))
-        for payment in payments:
+    def write_data(self):
+        cell_format = self.workbook.add_format({'font_size': '11', 'align': 'center'})
+        quarters = {
+            'Q4 2023': [],
+            'Q3 2023': [],
+            'Q2 2023': [],
+            'Q1 2023': [],
+            'Q4 2022': [],
+        }
+        for payment in self.data['payments']:
             client_id = payment['client_id']
-            amount = payment['amount']
             created_at = datetime.strptime(payment['created_at'], "%Y-%m-%dT%H:%M:%S.%fZ")
-            quarter = (created_at.month - 1) // 3 + 1
-            quarterly_payments[client_id][quarter] += amount
+            quarter = f'Q{(created_at.month - 1) // 3 + 1} {created_at.year}'
+            quarters[quarter].append(client_id)
 
-        top_payers = []
-        for client_id, quarterly_data in quarterly_payments.items():
-            total_amount = sum(quarterly_data.values())
-            top_payers.append({'client_id': client_id, 'total_amount': total_amount})
-
-        top_payers.sort(key=lambda x: x['total_amount'], reverse=True)
-        top_payers = top_payers[:10]
-
-        for i, payer in enumerate(top_payers, start=1):
-            client_info = next(client for client in clients if client['id'] == payer['client_id'])
-            fio = client_info['fio']
-            self.worksheet.write(self.row + i - 1, self.col, f"{i}. {fio}")
-            self.worksheet.write(self.row + i - 1, self.col + 1, f"{payer['total_amount']}")
-
+        for quarter in quarters.values():
+            self.col += 1
+            most_common = Counter(quarter).most_common()[:10]
+            for idx, most in enumerate(most_common):
+                self.worksheet.write(self.row + idx, self.col,
+                                     f'{idx + 1}. {self.data["clients"][most[0] - 1]["fio"]}', cell_format)
 
 class TopCitiesBlock(BaseXlsBlock):
-    NAME = "География клиентов"
+    NAME = 'География клиентов'
+    HEADERS = ['Статистика распределения', 'Город', 'Кол-во клиентов']
 
     def write_header(self):
-        self.worksheet.write(self.row, self.col, self.NAME, self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 1, "Город", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 2, "Количество клиентов", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-    def write_data(self):
-        self.col += 1
+        header_format = self.workbook.add_format(format_h1)
+        subheader_format = self.workbook.add_format(format_h2)
+        self.worksheet.write(self.row, self.col, self.NAME, header_format)
+        self.row += 1
+        for idx, name in enumerate(self.HEADERS):
+            self.worksheet.write(self.row, idx, name, subheader_format)
         self.row += 1
 
-        clients = self.data['clients']
-
+    def write_data(self):
+        cell_format = self.workbook.add_format({'font_size': '11', 'align': 'center'})
         city_counts = {}
-        for client in clients:
+        for client in self.data['clients']:
             city = client['city']
             city_counts[city] = city_counts.get(city, 0) + 1
 
-        top_cities = sorted(city_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+        popular_cities = sorted(city_counts.items(), key=lambda x: x[1], reverse=True)[:10]
 
-        for i, (city, count) in enumerate(top_cities, start=1):
-            self.worksheet.write(self.row + i - 1, self.col, f"{i}. {city}")
-            self.worksheet.write(self.row + i - 1, self.col + 1, f"{count}")
-
+        idx = 0
+        for city, count in popular_cities:
+            self.worksheet.write(self.row + idx, 1, f'{idx + 1}. {city}', cell_format)
+            self.worksheet.write(self.row + idx, 2, count, cell_format)
+            idx += 1
 
 class AccountStatusBlock(BaseXlsBlock):
-    NAME = "Анализ состояния счёта"
+    NAME = 'Анализ состояния счёта'
+    HEADERS = ['статистика состояния счета', 'Клиенты', 'Состояние счета']
+
     def write_header(self):
-        self.worksheet.write(self.row, self.col, self.NAME, self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 1, "ФИО", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
-        self.worksheet.write(self.row, self.col + 2, "Баланс", self.workbook.add_format({'bg_color': 'blue', 'border': 1}))
+        header_format = self.workbook.add_format(format_h1)
+        subheader_format = self.workbook.add_format(format_h2)
+        self.worksheet.write(self.row, self.col, self.NAME, header_format)
+        self.row += 1
+        for idx, name in enumerate(self.HEADERS):
+            self.worksheet.write(self.row, idx, name, subheader_format)
+        self.row += 1
+
     def write_data(self):
         self.col += 1
         self.row += 1
