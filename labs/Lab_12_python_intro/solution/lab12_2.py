@@ -10,6 +10,7 @@ def medians_Oleg(n, sequence):
         if len(min_heap) < len(max_heap):
             h.heappush(min_heap, -h.heappop(max_heap))
         sum_medians += -min_heap[0]
+
     return sum_medians
 
 if __name__ == '__main__':
