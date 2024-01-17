@@ -1,2 +1,6 @@
 xlsxwriter==3.1.5
+<<<<<<< HEAD
 requests==2.31.0
+=======
+requests==2.31.0
+>>>>>>> d08ee3abb26a86b41bf0e7dcb4c26d11dfe92fae
