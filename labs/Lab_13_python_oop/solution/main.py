@@ -1,6 +1,5 @@
 from datetime import datetime
 import json
-import os
 from writter import XlsAnalyticPaymentWriter
 
 def load_data(name_file):
